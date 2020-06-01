@@ -1,0 +1,39 @@
+{
+  "name": "node_koajs",
+  "version": "1.0.0",
+  "description": "koa 测试",
+  "main": "App.js",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-logger": "^3.2.1",
+    "koa-onerror": "^4.1.0",
+    "koa-router": "^8.0.8",
+    "mysql": "^2.18.1",
+    "systemjs": "^6.3.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "pm2": "^4.4.0"
+  },
+  "scripts": {
+    "tsc": " tsc -watch",
+    "dev": "pm2 start  ./bin.js",
+    "node": "nodemon  ./bin.js",
+    "monit": "pm2 monit",
+    "list": "pm2  list",
+    "stop": "pm2 stop App",
+    "restart": "pm2 restart App",
+    "delete": "pm2 delete App",
+    "log": " pm2 logs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/taobaoqiang/koa_auto.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
