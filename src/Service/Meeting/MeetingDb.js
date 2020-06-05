@@ -8,8 +8,6 @@ export function findLimit({ from, to, meeting_name, compere_name, start_time, en
 
         sql = await TermsLikeSql('Meeting', { meeting_name, compere_name })
         sql += await TimeBetween('start_time', { start_time, end_time })
-        console.log('结果数据', sql)
-
         sql += await LimitSql({ from, to })
         result = db(sql)
         return resolve(result)
