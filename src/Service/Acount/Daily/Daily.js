@@ -1,38 +1,74 @@
-import { FindDaily, FindId } from './DailyDb'
+import { FindDaily, FindId, AddSql } from './DailyDb'
 export let Daily = async (ctx) => {
-    let { query } = await ctx.GetParams(ctx);
+    let { query, method } = await ctx.GetParams(ctx);
+    switch (method) {
+        case 'get': {
+            // 查询
+            await findLimt(ctx, query);
+            break;
+        }
 
-    await findLimt(ctx, query);
+        case 'post': {
+            // 新增
+            await addInsert(ctx, query)
+            break;
+        }
+
+        default: {
+            break;
+        }
+    }
+
 
 
 }
+/**
+ *  分页 条件查询日志
+ * @param {*} ctx koa 请求实例
+ * @param {object} query  请求参数
+ * @param {number} query.page  页码
+ * @param {number}  query.page_size  每页包含数据
+ * @param {string}  query.functions  功能
+ * @param {string}  query.operate 操作
+ * @param {Date}    query.start_time  开始时间
+ * @param {Date}    query.end_time  结束时间
+ * @param {string}  query.acount  账户
+ *
+ */
 
 async function findLimt(ctx, query) {
-    let body = {}, db, page, page_size, account, functions, operate, start_time, end_time, admin_id;
-    page = query.page ? query.page : 1;
-    page_size = query.page_size ? query.page_size : 15;
-    start_time = query.start_time ? query.start_time : ''
-    end_time = query.end_time ? query.end_time : ''
-    operate = query.operate ? query.operate : ''
-    account = query.account ? query.account : ''
-    console.log('接收参数', account)
+    let body = {}, db, page, page_size, account, admin_id;
+    page = query?.page || 1
+    page_size = query?.page_size || 15
+    account = query?.account || ""
     // 搜索用户日志
     if (account) {
+        /**获取用户id  */
         admin_id = await FindId(account);
-        admin_id = admin_id[0]?.id
+        admin_id = admin_id[0]?.id || ''
+        if (!admin_id) {
+            ctx.body = new ctx.ResPage({ status: "请输入正确的账号查询", code: '203' })
+            return
+        }
     }
-
-
-    ctx.body = admin_id;
-    return
     let pam = {
         from: (page - 1) * page_size,
         to: page * page_size,
-        meeting_name: meeting_name,
-        functions: functions,
-        start_time: start_time,
-        end_time: end_time
+        admin_id: admin_id
     }
-    db = await FindDaily(query)
-    ctx.body = db
+    pam = Object.assign({}, pam, query)
+    db = await FindDaily(pam)
+
+    body = new ctx.ResPage({ data: db[0], page, page_size, total: db[1][0].total })
+    ctx.body = body
+}
+
+async function addInsert(ctx, query) {
+    let pam = {
+        functions: query.function
+    }
+    await AddSql({ ...query, ...pam });
+    let body = new ctx.ResForm({});
+    ctx.body = body
+
 }

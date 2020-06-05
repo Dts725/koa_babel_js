@@ -6,7 +6,7 @@ import { Menu } from '../Service/User/Menu/Menu'
 import { Daily } from "../Service/Acount/Daily/Daily"
 
 router.get('/menu/lists', Menu)
-router.get('/Daily', Daily)
+router.all('/Daily', Daily)
 
 // formRouter.use(basicUrl, router.routes())
 
