@@ -1,5 +1,5 @@
 
-import { post } from './LoginDb'
+import { SqlAdmin, SqlRole } from './LoginDb'
 export let Login = async (ctx) => {
     let { method } = await ctx.GetParams(ctx);
     let db = null;
@@ -38,22 +38,22 @@ async function login(ctx) {
         let body = {};
         let { query } = await ctx.GetParams(ctx);
         let db, sql = null;
-        sql = post(query);
-        db = await ctx.db(sql);
-        // resolve(ctx.ResFomr)
-        // return
+        db = await SqlAdmin(query);
         if (db.length) {
+            db = db[0]
             if (db.password !== db.password) {
                 body = new ctx.ResForm({ status: "请输入正确密码", code: '201' })
             } else {
-                body = new ctx.ResForm({ status: "登陆成功!", data: db[0] })
+                db.role_info = null;
+                if (db.super_perm !== 1) {
+                    db.role_info = await SqlRole({ role_id: db.role_id })
+                }
+                body = new ctx.ResForm({ status: "登陆成功!", data: db })
 
             }
         } else {
             body = new ctx.ResForm({ status: "请输入正确的账号密码", code: '204' });
         }
-        // console.log("注册时间", body);
-        // console.log("注册时间", new ctx.ResForm({ status: "请输入正确密码", code: '201', data: db }));
 
         resolve(body)
     })

@@ -1,7 +1,6 @@
 {
     "presets": [
-        "env",
-        "stage-0"
+        "@babel/env"
     ]
 }
 // 生产环境需要更改配置

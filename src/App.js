@@ -2,10 +2,13 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyParser');
 const KoaOnerror = require('Koa-onerror');
 const koaLogger = require('koa-logger');
-import { acount } from './src/API/Acount.js';
+import { acount } from './API/Acount.js';
 import { GetParams } from './Utils/GetParams.js'
-import { ResForm } from './Utils/ResponseForm.js'
-import { db, escape } from "./src/DB/DB"
+import { ResForm, ResPage } from './Utils/ResponseForm.js'
+import { db, escape } from "./DB/DB"
+import { Organization } from './API/Organization.js'
+import { User } from './API/User.js'
+import { MeetingRouter } from './API/Meeting'
 const app = new Koa();
 KoaOnerror(app);
 app.use(koaLogger());
@@ -13,7 +16,7 @@ app.use(bodyParser());
 
 app.context.GetParams = GetParams;
 app.context.ResForm = ResForm;
-app.context.db = db;
+app.context.ResPage = ResPage;
 app.context.escape = escape;
 
 app.use(async (ctx, next) => {
@@ -29,10 +32,16 @@ app.use(async (ctx, next) => {
 
     ctx.body = JSON.stringify(ctx.body)
 });
+app.use(User)
+app.use(MeetingRouter)
 app.use(acount)
+app.use(Organization)
 
 app.use((ctx, next) => {
-    ctx.body = "404" + ctx.parth
+    ctx.body = {
+        code: '404',
+        status: '请求路径找不到 ' + ctx.url,
+    }
 })
 
 
