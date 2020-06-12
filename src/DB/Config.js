@@ -6,6 +6,7 @@ export let conf = {
     password: "TY911221",
     database: "tao_bao",
     connectTimeout: 10000,
+    dateStrings: true,
     multipleStatements: true
 }
 export let YZX = {
@@ -15,6 +16,7 @@ export let YZX = {
     user: "testyzxfb_shyunh",
     password: "s3KZwKWGSKwDDHGL",
     database: "testyzxfb_shyunh",
+    dateStrings: true,
     connectTimeout: 10000,
     multipleStatements: true
 }
