@@ -1,0 +1,11 @@
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (229, 100000030, 33, 1);
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (246, 100000037, 174, 1);
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (249, 100000040, 33, 1);
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (453, 100000077, 24, 0);
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (462, 100000077, 182, 0);
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (487, 100000078, 204, 1);
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (575, 100000088, 104, 0);
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (585, 100000096, 96, 1);
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (601, 100000118, 120, 1);
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (602, 100000127, 120, 1);
+INSERT INTO `Meeting_Mic`(`id`, `meeting_id`, `user_id`, `status`) VALUES (614, 100000129, 96, 0);

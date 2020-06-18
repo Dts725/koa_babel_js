@@ -10,7 +10,7 @@ export function GetPageFromTo(query) {
         page_size = query?.page_size || 15;
         let pam = {
             from: (page - 1) * page_size,
-            to: page * page_size,
+            to: Number(page_size),
         }
         pam = Object.assign({}, pam, query)
         return resolve({ pam, page, page_size })

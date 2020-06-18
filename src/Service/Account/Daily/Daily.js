@@ -53,14 +53,21 @@ async function findLimt(ctx, query) {
     }
     let pam = {
         from: (page - 1) * page_size,
-        to: page * page_size,
+        to: Number(page_size),
         admin_id: admin_id
     }
+
+
     pam = Object.assign({}, pam, query)
     db = await FindDaily(pam)
+    try {
+        body = new ctx.ResPage({ data: db[0], page, page_size, total: db[1][0].total })
+        ctx.body = body
+    } catch (error) {
+        console.log("结果报错", db)
+        ctx.body = error
+    }
 
-    body = new ctx.ResPage({ data: db[0], page, page_size, total: db[1][0].total })
-    ctx.body = body
 }
 
 async function addInsert(ctx, query) {

@@ -1,7 +1,7 @@
 let mysql = require('mysql');
 import { conf, YZX } from "./Config"
 // var pool = mysql.createPool(conf);
-let pool = mysql.createPool(YZX);
+let pool = mysql.createPool(conf);
 export let escape = (str) => pool.escape(str);
 export let db = function (sql) {
     // 使用连接

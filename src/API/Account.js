@@ -6,8 +6,9 @@ import { User } from '../Service/User/User.js'
 import { Login } from '../Service/Account/Login/Login.js'
 import { Account } from '../Service/Account/Account/Account.js'
 let basicUrl = '/account';
-router.all('/:id', Account)
 router.all('/user', User)
-router.all('/login', Login);
+router.post('/login', Login);
+router.get('/:id', Account)
+
 formRouter.use(basicUrl, router.routes())
 export let acount = formRouter.routes();

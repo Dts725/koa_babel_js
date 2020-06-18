@@ -1,22 +1,33 @@
-import { GetUserListSql } from "./UserDb"
+import { GetUserListSql, GetUserDetailDb, UpdateDb, addDb, DeleteDb } from "./UserDb"
 import { GetPageFromTo } from '../../../Utils/GetPageFromTo'
+import { ResForm } from "../../../Utils/ResponseForm";
 export let GetUserList = async (ctx) => {
     let { method, query } = await ctx.GetParams(ctx);
+
     switch (method) {
         case 'get': {
-            await queryFn(ctx, query)
+            if (query.id) {
+                // 查看详情
+                await getUserDetail(ctx, { id: query.id })
+
+            } else {
+                await queryFn(ctx, query)
+
+            }
             break;
         }
         case 'post': {
-
+            // 插入新增本地数据
+            await addUser(ctx, query)
             break;
         }
         case 'put': {
-
+            // 更新数据
+            await update(ctx, query)
             break;
         }
         case 'delete': {
-
+            await deleteFn(ctx, query)
             break;
         }
         default: {
@@ -44,10 +55,12 @@ export let GetUserList = async (ctx) => {
  * @param {string} quer.organization_ids   要查询的组织ids 字符串
  */
 async function queryFn(ctx, query) {
-    let body = {}, db = "";
+    let body = {}, db = [];
     let { pam, page, page_size } = await GetPageFromTo(query)
     db = await GetUserListSql(pam);
     db[0] = db[0].map(el => {
+
+        el.age = getAge(el.birth)
 
         if (el.identity_type === 1) {
             el.identity_type_zh = "党员"
@@ -74,5 +87,73 @@ async function queryFn(ctx, query) {
     })
     body = new ctx.ResPage({ data: db[0], page_size, page, total: db[1][0].total });
     ctx.body = body;
+
+}
+
+
+/**查看用户详情
+ * 
+ * @param {*} ctx 
+ * @param {object} object.id  要查询的宪法请id
+ */
+
+async function getUserDetail(ctx, { id }) {
+    let db = [], body = {};
+    db = await GetUserDetailDb({ id });
+
+    if (!db[1].pid) {
+        db[0].organization_name = []
+    } else {
+        db[0].organization_name = [db[1].id]
+    }
+    body = new ctx.ResForm({ data: db[0] });
+    ctx.body = body
+}
+function getAge(birt) {
+    if (!birt) return 56
+    let byear = birt.substr(0, 4);
+    let bmonth = birt.substr(5, 2)
+    let nyear = new Date().getFullYear();
+    let nmonth = new Date().getMonth + 1;
+    let age = nyear - byear;
+    age = bmonth > nmonth ? age : age + 1
+    return age;
+}
+
+
+// 更新用户信息
+async function update(ctx, pam) {
+    let result = await UpdateDb(pam);
+    if (result.affectedRows) {
+        ctx.body = new ResForm({ data: [] })
+    } else {
+        ctx.body = new ResForm({ data: result })
+
+    }
+
+
+}
+
+
+
+// 插入 新增数据
+async function addUser(ctx, pam) {
+    let result = await addDb(pam);
+    if (result.affectedRows) {
+        ctx.body = new ctx.ResForm({ data: [] })
+    } else {
+        ctx.body = new ctx.ResForm({ data: result })
+    }
+
+}
+
+// 删出用户信息 
+async function deleteFn(ctx, pam) {
+    let result = await DeleteDb(pam);
+    if (result.affectedRows) {
+        ctx.body = new ctx.ResForm({ data: [] })
+    } else {
+        ctx.body = result;
+    }
 
 }

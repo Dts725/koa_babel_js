@@ -38,7 +38,7 @@ export function TermsLikeSql(tableName, obj) {
  * @param {object}   connect  like 语句和现有语句的组合关系  es:  and  or 默认 AND ,
  * @param {object}   str   判断是否需要 添加连接符
  */
-export function LikeField({ obj, connect = 'AND', str, alias = false }) {
+export function LikeField({ obj, connect = ' AND', str, alias = false }) {
     return new Promise(resolve => {
         let sqls = "", sqlArr = [];
         Object.keys(obj).forEach(el => {
@@ -49,9 +49,9 @@ export function LikeField({ obj, connect = 'AND', str, alias = false }) {
 
         if (sqlArr.length) {
             if (str.search('WHERE') !== -1 || str.search('where') !== -1) {
-                sqls += ` ${connect}  ${sqlArr.join('AND')}`;
+                sqls += ` ${connect}  ${sqlArr.join(' AND')}`;
             } else {
-                sqls += ' WHERE' + sqlArr.join('AND');
+                sqls += ' WHERE' + sqlArr.join(' AND');
             }
         }
         return resolve(sqls)
@@ -66,7 +66,7 @@ export function LikeField({ obj, connect = 'AND', str, alias = false }) {
  * @param {object}   connect  and 语句和现有语句的组合关系  es:  and  or 默认 AND ,
  * @param {object}   str   判断是否需要 添加连接符
  */
-export function EqualField({ obj, connect = 'AND', str, alias = false }) {
+export function EqualField({ obj, connect = ' AND', str, alias = false }) {
     return new Promise(resolve => {
         let sqls = "", sqlArr = [];
         Object.keys(obj).forEach(el => {
@@ -77,10 +77,10 @@ export function EqualField({ obj, connect = 'AND', str, alias = false }) {
 
         if (sqlArr.length) {
             if (str.search('WHERE') !== -1 || str.search('where') !== -1) {
-                sqls += ` ${connect}  ${sqlArr.join('AND')}`;
+                sqls += ` ${connect}  ${sqlArr.join(' AND')}`;
 
             } else {
-                sqls += ' WHERE' + sqlArr.join('AND');
+                sqls += ' WHERE' + sqlArr.join(' AND');
             }
         }
         return resolve(sqls)
@@ -143,6 +143,24 @@ export function AddData(tabelName, obj) {
         sql = `INSERT INTO ${tabelName} (${fildes.join()}) VALUES (${values.join()});`
 
         return resolve(sql);
+    })
+}
+/**
+ *  生成更新  sql
+ * @param {*}   表名
+ * @param {*} param1 
+* @returns {Promise} Promise<any>
+*/
+export function UpdateData(obj) {
+    return new Promise(resolve => {
+        let fildes = [], values = [], sql = "";
+        Object.keys(obj).forEach(el => {
+            if (obj[el]) {
+                fildes.push(el + '=' + escape(obj[el]));
+            }
+        })
+        sql = fildes.join();
+        return resolve(' ' + sql);
     })
 }
 

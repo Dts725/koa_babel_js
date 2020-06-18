@@ -1,6 +1,12 @@
 {
     "presets": [
-        "@babel/env"
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "node": true
+                }
+            }
+        ]
     ]
 }
-// 生产环境需要更改配置

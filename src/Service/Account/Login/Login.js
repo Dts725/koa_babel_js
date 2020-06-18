@@ -2,6 +2,7 @@
 import { SqlAdmin, SqlRole } from './LoginDb'
 export let Login = async (ctx) => {
     let { method } = await ctx.GetParams(ctx);
+    console.log("走不进去")
     let db = null;
 
     switch (method) {
