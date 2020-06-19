@@ -1,0 +1,650 @@
+{
+	"info": {
+		"_postman_id": "8ed854f2-8cac-4ec6-820e-94c7157a00fe",
+		"name": "local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "账户模块",
+			"item": [
+				{
+					"name": "登陆接口",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "account",
+									"value": "huaweiyanfa",
+									"description": "用户名",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"description": "密码",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/account/login",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"account",
+								"login"
+							]
+						},
+						"description": "登陆接口"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "组织模块",
+			"item": [
+				{
+					"name": "查找子孙后代 包括自己",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/find/organization/child/9",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"find",
+								"organization",
+								"child",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "组织列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/Organization?organization_ids=64,65,66",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"Organization"
+							],
+							"query": [
+								{
+									"key": "organization_ids",
+									"value": "64,65,66",
+									"description": "组织id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "增加 和编辑 组织列表",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "data",
+									"value": "[{\"id\":5,\"pid\":\"0\",\"organization_name\":\"华为党组织\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0,\"sub\":[{\"id\":64,\"pid\":\"5\",\"organization_name\":\"华为组织-研发部\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0,\"undefined\":[{\"id\":65,\"pid\":\"64\",\"organization_name\":\"华为-研发-1组\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0},{\"id\":66,\"pid\":\"64\",\"organization_name\":\"华为-研发-2组\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0}]},{\"id\":83,\"pid\":\"5\",\"organization_name\":\"华为组织-产品部\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0,\"undefined\":[{\"id\":91,\"pid\":\"83\",\"organization_name\":\"华为-产品-1部\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0}]}]},{\"id\":9,\"pid\":\"0\",\"organization_name\":\"云话测试\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0,\"sub\":[{\"id\":47,\"pid\":\"9\",\"organization_name\":\"云话测试-测试部\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0},{\"id\":48,\"pid\":\"9\",\"organization_name\":\"云话测试-产品部\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0},{\"id\":49,\"pid\":\"9\",\"organization_name\":\"云话测试-研发部\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0}]},{\"id\":32,\"pid\":\"0\",\"organization_name\":\"红旗新村\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0},{\"id\":52,\"pid\":\"0\",\"organization_name\":\"云话科技\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0,\"sub\":[{\"id\":68,\"pid\":\"52\",\"organization_name\":\"研发部\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0}]},{\"id\":95,\"pid\":\"0\",\"organization_name\":\"山西联通\",\"is_edit\":0,\"is_del\":0,\"is_insert\":0,\"sub\":[{\"organization_name\":\"新增节点\",\"pid\":95,\"sub\":[],\"is_edit\":\"0\",\"is_del\":\"0\",\"is_insert\":\"1\",\"id\":-1}]}]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/Organization",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"Organization"
+							],
+							"query": [
+								{
+									"key": "data",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除组织",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/have/use/113",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"have",
+								"use",
+								"113"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "用户模块",
+			"item": [
+				{
+					"name": "菜单列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/menu/lists",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"menu",
+								"lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户查询",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/user?page_size=15&name=云话测试",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "page_size",
+									"value": "15"
+								},
+								{
+									"key": "name",
+									"value": "云话测试"
+								},
+								{
+									"key": "phone",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "organization_id",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "examine_start_datetime",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "examine_end_datetime",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "is_online",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "examine_status",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "identity_type",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "create_start_datetime",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "create_end_datetime",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "organization_ids",
+									"value": "5,9",
+									"disabled": true
+								},
+								{
+									"key": "is_valid",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查看账户详情",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/account/1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"account",
+								"1"
+							],
+							"query": [
+								{
+									"key": "lasd",
+									"value": "42342",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "审批管理",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "examine_reason",
+									"value": "\"通过\"",
+									"description": "未通过原因",
+									"type": "text"
+								},
+								{
+									"key": "examine_status",
+									"value": "1",
+									"description": "1通过 2 未通过",
+									"type": "text"
+								},
+								{
+									"key": "examine_user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "examine_user_name",
+									"value": "lala",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "132",
+									"type": "text"
+								},
+								{
+									"key": "organization_id",
+									"value": "52",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/user/update/examine/status",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user",
+								"update",
+								"examine",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新本地用户数据详情",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "examine_reason",
+									"value": "\"通过\"",
+									"description": "未通过原因",
+									"type": "text"
+								},
+								{
+									"key": "examine_status",
+									"value": "1",
+									"description": "1通过 2 未通过",
+									"type": "text"
+								},
+								{
+									"key": "examine_user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "examine_user_name",
+									"value": "lala",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "132",
+									"type": "text"
+								},
+								{
+									"key": "organization_id",
+									"value": "52",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/user/update/examine/status",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user",
+								"update",
+								"examine",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增本地用户",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "birth",
+									"value": "2020-06-09",
+									"type": "text"
+								},
+								{
+									"key": "card_back_six",
+									"value": "789456",
+									"type": "text"
+								},
+								{
+									"key": "identity_type",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "测试001",
+									"type": "text"
+								},
+								{
+									"key": "organization_id",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "1554896235",
+									"type": "text"
+								},
+								{
+									"key": "sex",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/user",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "2020-06-09",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除本地用户",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/user/140,160",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user",
+								"140,160"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新用户账号状态",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}user/update/status/132",
+							"host": [
+								"{{local}}user"
+							],
+							"path": [
+								"update",
+								"status",
+								"132"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查看用户详情",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/user/132",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user",
+								"132"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "会议模块",
+			"item": [
+				{
+					"name": "会议列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/Meeting?page=1&page_size=15&compere_name=22&start_time=2020-05-04 00:00:00",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"Meeting"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "page_size",
+									"value": "15"
+								},
+								{
+									"key": "meeting_name",
+									"value": "云",
+									"description": "会议名称",
+									"disabled": true
+								},
+								{
+									"key": "compere_name",
+									"value": "22",
+									"description": "主持人"
+								},
+								{
+									"key": "start_time",
+									"value": "2020-05-04 00:00:00",
+									"description": "开始时间"
+								},
+								{
+									"key": "end_time",
+									"value": "2020-06-04 00:00:00",
+									"description": "结束时间",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "日志",
+			"item": [
+				{
+					"name": "日志查看管理",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/Daily?account=huawei&page=1&page_size=15&functions=本地管理&operate=查看&start_time&end_time",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"Daily"
+							],
+							"query": [
+								{
+									"key": "account",
+									"value": "huawei"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "page_size",
+									"value": "15"
+								},
+								{
+									"key": "functions",
+									"value": "本地管理"
+								},
+								{
+									"key": "operate",
+									"value": "查看"
+								},
+								{
+									"key": "start_time",
+									"value": null
+								},
+								{
+									"key": "end_time",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

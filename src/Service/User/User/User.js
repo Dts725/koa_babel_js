@@ -76,10 +76,13 @@ async function getUserDetail(ctx, { id }) {
     db = await GetUserDetailDb({ id });
 
     if (!db[1].pid) {
-        db[0].organization_name = []
+        db[0].organization_name = db[1].organization_name
+        db[0].organization_parent_ids = []
     } else {
-        db[0].organization_name = [db[1].id]
+        db[0].organization_name = db[1].organization_name
+        db[0].organization_parent_ids = [db[1].id]
     }
+
     body = new ctx.ResForm({ data: db[0] });
     ctx.body = body
 }
@@ -140,7 +143,6 @@ function setAdd(db) {
         let data = db[0].map(el => {
 
             el.age = getAge(el.birth)
-            console.log("数据处理", el)
             if (el.identity_type === 1) {
                 el.identity_type_zh = "党员"
             }

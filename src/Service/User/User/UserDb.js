@@ -27,6 +27,7 @@ export function GetUserDetailDb({ id }) {
         let sql2 = `SELECT a.* FROM Organization AS a WHERE id = ${escape(result[0].organization_id)}`
         result2 = await db(sql2)
         result.push(result2)
+
         return resolve(result)
     })
 }

@@ -29,7 +29,7 @@ export class ResPage {
             prev_page_url: null,
             to: page * page_size > total ? total : page * page_size,
             total: total,
-            current_page: page
+            current_page: Number(page)
         }
     }
 

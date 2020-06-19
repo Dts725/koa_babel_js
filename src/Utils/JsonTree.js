@@ -46,9 +46,34 @@ function getchilds(id, array, obj, key) {
 }
 // 获取顶层元素
 function getTop(el, data) {
-    if (data.filter(d => d.id === el.pid).length) {
+    if (data.filter(d => d.id == el.pid).length) {
         return false
     } else {
         return true
     }
 }
+
+
+// 递归展开json tree
+
+export function TreeFlat(pam) {
+    return new Promise(async resolve => {
+        let compressedData = [];// 用于存储递归结果（扁平数据）
+        function treeDataToCompressed(source) {
+            return new Promise(resolve => {
+
+                for (let i in source) {
+                    compressedData.push(source[i]);
+                    source[i].sub && source[i].sub.length > 0 ? treeDataToCompressed(source[i].sub) : ""// 子级递归
+                }
+                return resolve(compressedData);
+            })
+        }
+        let data = await treeDataToCompressed(pam)
+
+        return resolve(data)
+    })
+}
+
+
+

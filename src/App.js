@@ -66,8 +66,8 @@ app.use(Organization)
 app.use((ctx, next) => {
     ctx.body = {
         code: '404',
-        status: '请求路径找不到 ' + ctx.url,
-        methods: ctx.method
+        status: ctx.method + '请求路径找不到 ' + ctx.url,
+
     }
 })
 let options = {};
