@@ -7,11 +7,19 @@ export let db = function (sql) {
     // 使用连接
     return new Promise(resolve => {
         pool.getConnection(function (err, connection) {
-            if (err) throw err;
+
+            if (err) {
+                console.log(err)
+                return resolve(err);
+            }
             // let en = pool.escape(sql)
             connection.query(sql, function (err, result, rows) {
                 // 使用连接执行查询
-                if (err) throw err;
+                if (err) {
+                    console.log(err)
+                    return resolve(err);
+                }
+
                 // 返回数据格式化 暂未发现影响
                 let r = JSON.stringify(result);
                 r = JSON.parse(r)
@@ -20,6 +28,8 @@ export let db = function (sql) {
                 connection.release();
                 //连接不再使用，返回到连接池
             });
+
+
         })
 
     });

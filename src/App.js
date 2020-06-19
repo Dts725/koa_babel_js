@@ -34,7 +34,11 @@ app.use(
         exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'] //设置获取其他自定义字段
     })
 );
-app.use(bodyParser());
+app.use(bodyParser({
+    onerror: function (err, ctx) {
+        ctx.throw('body parse error', 422);
+    }
+}));
 
 app.context.GetParams = GetParams;
 app.context.ResForm = ResForm;

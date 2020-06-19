@@ -18,11 +18,13 @@ export const GetParams = (ctx) => {
                 query = Object.assign(query, ctx.params)
             }
             let pam = { path, query: { ...query }, method, url }
+            // GetPost(ctx.req)
             return resolve(pam)
         } catch (error) {
-            console.error(error)
+            console.log(error)
             return resolve(error)
         }
 
     })
 }
+

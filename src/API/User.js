@@ -7,7 +7,7 @@ import { Daily } from "../Service/Account/Daily/Daily"
 import { GetUserList } from '../Service/User/User/User'
 import { Examine } from '../Service/Account/Examine/Examine'
 import { UpdateAccountStatus } from '../Service/User/UpdateAccountStatus/UpdateAccountStatus'
-router.post('/user/update/examine/status', Examine);
+router.all('/user/update/examine/status', Examine);
 router.get('/menu/lists', Menu)
 router.all('/Daily', Daily)
 router.all('/user', GetUserList)
