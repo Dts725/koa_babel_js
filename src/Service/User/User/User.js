@@ -58,33 +58,7 @@ async function queryFn(ctx, query) {
     let body = {}, db = [];
     let { pam, page, page_size } = await GetPageFromTo(query)
     db = await GetUserListSql(pam);
-    db[0] = db[0].map(el => {
-
-        el.age = getAge(el.birth)
-
-        if (el.identity_type === 1) {
-            el.identity_type_zh = "党员"
-        }
-        if (el.identity_type === 2) {
-            el.identity_type_zh = "群众"
-        }
-        if (el.identity_type === 3) {
-            el.identity_type_zh = "预备党员"
-        }
-
-        if (el.examine === 1) {
-            el.user_status_zh = "已认证"
-        }
-        if (el.examine === 2) {
-            el.user_status_zh = "未通过"
-        }
-        if (el.examine === 3) {
-            el.user_status_zh = "待审核"
-        }
-        el.sex_zh = el.sex === 1 ? '男' : '女'
-        return el;
-
-    })
+    db[0] = await setAdd(db)
     body = new ctx.ResPage({ data: db[0], page_size, page, total: db[1][0].total });
     ctx.body = body;
 
@@ -156,4 +130,41 @@ async function deleteFn(ctx, pam) {
         ctx.body = result;
     }
 
+}
+
+// 添加基本数据
+
+
+function setAdd(db) {
+    return new Promise(async resolve => {
+        let data = db[0].map(el => {
+
+            el.age = getAge(el.birth)
+            console.log("数据处理", el)
+            if (el.identity_type === 1) {
+                el.identity_type_zh = "党员"
+            }
+            if (el.identity_type === 2) {
+                el.identity_type_zh = "群众"
+            }
+            if (el.identity_type === 3) {
+                el.identity_type_zh = "预备党员"
+            }
+
+            if (el.examine === 1) {
+                el.user_status_zh = "已认证"
+            }
+            if (el.examine === 2) {
+                el.user_status_zh = "未通过"
+            }
+            if (el.examine === 3) {
+                el.user_status_zh = "待审核"
+            }
+            el.sex_zh = el.sex === 1 ? '男' : '女'
+            return el;
+
+        })
+        return resolve(data)
+
+    });
 }

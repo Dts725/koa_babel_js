@@ -1,5 +1,5 @@
 let mysql = require('mysql');
-import { conf, YZX } from "./Config"
+import { conf } from "./Config"
 // var pool = mysql.createPool(conf);
 let pool = mysql.createPool(conf);
 export let escape = (str) => pool.escape(str);
